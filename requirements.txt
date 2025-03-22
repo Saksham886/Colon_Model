@@ -1,9 +1,0 @@
-﻿fastapi
-uvicorn
-numpy
-librosa
-tensorflow
-scipy
-torch
-tqdm
-soundfile
