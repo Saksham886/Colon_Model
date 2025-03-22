@@ -78,15 +78,15 @@ def predict_emotion(audio, sr):
     return prediction
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)):
-    """API endpoint to accept a .wav file and return predicted mood."""
+async def predict(request: Request, file: UploadFile = File(...)):
     try:
+        print(f"Received {request.method} request on /predict")  # Log request method
         audio_bytes = await file.read()
         audio_buffer = BytesIO(audio_bytes)
-        
+
         audio, sr = librosa.load(audio_buffer, sr=22050)
         mood = predict_emotion(audio, sr)
-        
+
         return {"mood": mood}
     except Exception as e:
         return {"error": str(e)}
